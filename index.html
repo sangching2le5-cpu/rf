@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Practice - Prefixes & Suffixes</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        pastel: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 h-full flex flex-col antialiased">
+
+    <!-- App Container -->
+    <div id="app" class="flex h-screen overflow-hidden">
+
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="w-64 bg-slate-900 text-slate-100 flex flex-col transition-all duration-300 z-30 fixed inset-y-0 left-0 lg:static -translate-x-full lg:translate-x-0 shadow-xl">
+            <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-pastel-500 text-white p-2.5 rounded-xl shadow-md">
+                        <i class="fa-solid fa-graduation-cap text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg tracking-tight text-white">VocabMaster</h1>
+                        <p class="text-xs text-slate-400">Prefixes & Suffixes B1-B2</p>
+                    </div>
+                </div>
+                <button onclick="toggleSidebar()" class="lg:hidden text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto custom-scrollbar">
+                <button onclick="switchTab('dashboard')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-slate-300 hover:bg-slate-800 hover:text-white" data-target="dashboard">
+                    <i class="fa-solid fa-chart-pie w-5"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button onclick="switchTab('practice')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-slate-300 hover:bg-slate-800 hover:text-white" data-target="practice">
+                    <i class="fa-solid fa-book-open-reader w-5"></i>
+                    <span>Practice Mode</span>
+                </button>
+                <button onclick="switchTab('exam')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-slate-300 hover:bg-slate-800 hover:text-white" data-target="exam">
+                    <i class="fa-solid fa-file-pen w-5"></i>
+                    <span>Exam Mode (75m)</span>
+                </button>
+                <button onclick="switchTab('review')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-slate-300 hover:bg-slate-800 hover:text-white" data-target="review">
+                    <i class="fa-solid fa-triangle-exclamation w-5"></i>
+                    <span>Review Mistakes <span id="reviewCountBadge" class="ml-auto bg-rose-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">0</span></span>
+                </button>
+                <button onclick="switchTab('vocabulary')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-slate-300 hover:bg-slate-800 hover:text-white" data-target="vocabulary">
+                    <i class="fa-solid fa-book-bookmark w-5"></i>
+                    <span>Vocabulary Bank</span>
+                </button>
+                <button onclick="switchTab('progress')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-slate-300 hover:bg-slate-800 hover:text-white" data-target="progress">
+                    <i class="fa-solid fa-chart-line w-5"></i>
+                    <span>Detailed Progress</span>
+                </button>
+            </nav>
+
+            <!-- Sidebar Footer -->
+            <div class="p-4 border-t border-slate-800">
+                <button onclick="confirmReset()" class="w-full bg-slate-800 hover:bg-rose-900/40 text-slate-300 hover:text-rose-400 text-xs font-semibold py-2.5 px-4 rounded-xl transition-all border border-slate-700/50 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>Reset All Progress</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <div class="flex-1 flex flex-col min-w-0 overflow-hidden bg-slate-50">
+            
+            <!-- Top Navbar -->
+            <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-6 z-20 shadow-xs">
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleSidebar()" class="lg:hidden text-slate-600 hover:text-slate-900 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                    <h2 id="pageTitle" class="text-lg font-bold text-slate-800">Dashboard</h2>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span id="headerStreak" class="bg-pastel-50 text-pastel-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-pastel-200 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-bolt text-amber-500"></i>
+                        <span id="completedCountText">0/100 completed</span>
+                    </span>
+                </div>
+            </header>
+
+            <!-- Scrollable View Area -->
+            <main id="mainContent" class="flex-1 overflow-y-auto p-4 sm:p-8 custom-scrollbar relative">
+                
+                <!-- ================= TAB 1: DASHBOARD ================= -->
+                <div id="view-dashboard" class="tab-view space-y-6 max-w-6xl mx-auto">
+                    <!-- Welcome Banner -->
+                    <div class="bg-gradient-to-r from-pastel-600 to-pastel-800 rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h2 class="text-2xl sm:text-3xl font-bold mb-2">Master English Prefixes & Suffixes</h2>
+                            <p class="text-pastel-100 text-sm sm:text-base max-w-2xl mb-6">
+                                Boost your B1–B2 vocabulary with 100 curated questions, in-depth explanations, word families, and smart review tracking.
+                            </p>
+                            <div class="flex flex-wrap gap-3">
+                                <button onclick="switchTab('practice'); startPractice(1);" class="bg-white text-pastel-700 font-semibold px-6 py-3 rounded-xl shadow hover:bg-pastel-50 transition-all flex items-center space-x-2">
+                                    <i class="fa-solid fa-play"></i>
+                                    <span>Start Practice</span>
+                                </button>
+                                <button onclick="switchTab('exam'); startExam();" class="bg-pastel-700 hover:bg-pastel-600 text-white font-semibold px-6 py-3 rounded-xl shadow transition-all border border-pastel-500/50 flex items-center space-x-2">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <span>Take Exam Mode</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl pointer-events-none">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-pastel-100 text-pastel-600 rounded-xl flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-clipboard-question"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Attempted</p>
+                                <h3 id="statAttempted" class="text-2xl font-bold text-slate-800">0 / 100</h3>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Correct Answers</p>
+                                <h3 id="statCorrect" class="text-2xl font-bold text-slate-800">0</h3>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-percent"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Accuracy Rate</p>
+                                <h3 id="statAccuracy" class="text-2xl font-bold text-slate-800">0%</h3>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-trophy"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Best Exam Score</p>
+                                <h3 id="statBestScore" class="text-2xl font-bold text-slate-800">N/A</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Part Selector -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center justify-between">
+                            <span>Practice by Sections</span>
+                            <span class="text-xs font-normal text-slate-500">7 Specialized Topics</span>
+                        </h3>
+                        <div id="partCardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= TAB 2: PRACTICE MODE ================= -->
+                <div id="view-practice" class="tab-view hidden max-w-4xl mx-auto space-y-6">
+                    <!-- Practice Header Bar -->
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-4">
+                        <div class="flex items-center space-x-3">
+                            <select id="practicePartSelect" onchange="changePracticePart(this.value)" class="bg-slate-100 border border-slate-300 text-slate-800 text-sm font-semibold rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pastel-500">
+                                <option value="0">All Parts (1–100)</option>
+                                <option value="1">Part 1: Adjectives -ed / -ing (1–15)</option>
+                                <option value="2">Part 2: Words beginning with PRE- (16–30)</option>
+                                <option value="3">Part 3: Words beginning with DIS- (31–45)</option>
+                                <option value="4">Part 4: Adjectives ending in -OUS (46–60)</option>
+                                <option value="5">Part 5: Nouns -ION / -MENT (61–80)</option>
+                                <option value="6">Part 6: Academic -OLOGY / -LOGY (81–90)</option>
+                                <option value="7">Part 7: Prefix EX- & Word Families (91–100)</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span id="practiceProgressText" class="text-sm font-semibold text-slate-600">Question 1 of 100</span>
+                            <button id="markReviewBtn" onclick="toggleMarkCurrentQuestion()" class="text-slate-400 hover:text-amber-500 text-xl transition-colors" title="Mark for review">
+                                <i class="fa-solid fa-bookmark"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                        <div id="practiceProgressBar" class="bg-pastel-500 h-full transition-all duration-300" style="width: 1%"></div>
+                    </div>
+
+                    <!-- Question Card -->
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                        <div class="flex items-center justify-between">
+                            <span id="practicePartBadge" class="bg-pastel-100 text-pastel-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Part 1</span>
+                            <span id="practiceQNum" class="text-sm font-semibold text-slate-400">#01</span>
+                        </div>
+                        
+                        <h3 id="practiceQuestionText" class="text-lg sm:text-xl font-bold text-slate-800 leading-relaxed">
+                            Loading question...
+                        </h3>
+
+                        <!-- Options Container -->
+                        <div id="practiceOptionsContainer" class="space-y-3">
+                            <!-- Populated dynamically -->
+                        </div>
+
+                        <!-- Explanation Box (Hidden initially) -->
+                        <div id="practiceExplanationBox" class="hidden bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3 transition-all">
+                            <div class="flex items-center space-x-2 text-emerald-600 font-bold text-sm">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <span>Explanation & Word Breakdown</span>
+                            </div>
+                            <div id="practiceExplanationContent" class="text-sm text-slate-700 space-y-2">
+                                <!-- Explanation text -->
+                            </div>
+                        </div>
+
+                        <!-- Footer Navigation Buttons -->
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <button onclick="prevPracticeQuestion()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-5 py-2.5 rounded-xl transition-all flex items-center space-x-2 text-sm">
+                                <i class="fa-solid fa-arrow-left"></i>
+                                <span>Previous</span>
+                            </button>
+                            <button onclick="nextPracticeQuestion()" class="bg-pastel-600 hover:bg-pastel-700 text-white font-semibold px-6 py-2.5 rounded-xl transition-all shadow-sm flex items-center space-x-2 text-sm">
+                                <span>Next Question</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= TAB 3: EXAM MODE ================= -->
+                <div id="view-exam" class="tab-view hidden max-w-6xl mx-auto space-y-6">
+                    <!-- Exam Start Screen -->
+                    <div id="examStartScreen" class="bg-white rounded-2xl border border-slate-200 p-8 text-center max-w-2xl mx-auto shadow-sm space-y-6">
+                        <div class="w-20 h-20 bg-pastel-100 text-pastel-600 rounded-2xl mx-auto flex items-center justify-center text-3xl">
+                            <i class="fa-solid fa-file-pen"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-800 mb-2">Formal Vocabulary Examination</h3>
+                            <p class="text-slate-600 text-sm">
+                                This exam consists of all 100 questions randomized from prefixes, suffixes, -ed/-ing adjectives, and word families. You will have 75 minutes.
+                            </p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-left text-sm space-y-2">
+                            <div class="flex items-center space-x-2 text-slate-700"><i class="fa-solid fa-check text-pastel-600"></i><span>100 Multiple-choice questions (A, B, C, D)</span></div>
+                            <div class="flex items-center space-x-2 text-slate-700"><i class="fa-solid fa-check text-pastel-600"></i><span>Timer: 75 minutes countdown</span></div>
+                            <div class="flex items-center space-x-2 text-slate-700"><i class="fa-solid fa-check text-pastel-600"></i><span>Instant grading & detailed review upon submission</span></div>
+                        </div>
+                        <button onclick="beginExam()" class="w-full bg-pastel-600 hover:bg-pastel-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition-all text-base">
+                            Start Exam Now
+                        </button>
+                    </div>
+
+                    <!-- Exam Active Screen -->
+                    <div id="examActiveScreen" class="hidden grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        <!-- Left 3 Cols: Question Area -->
+                        <div class="lg:col-span-3 space-y-6">
+                            <!-- Timer & Info Bar -->
+                            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <span id="examCurrentBadge" class="bg-pastel-100 text-pastel-700 text-xs font-bold px-3 py-1 rounded-full">Question 1/100</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-rose-600 font-bold bg-rose-50 px-4 py-1.5 rounded-xl border border-rose-200">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <span id="examTimerDisplay">75:00</span>
+                                </div>
+                            </div>
+
+                            <!-- Question Card -->
+                            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                                <h3 id="examQuestionText" class="text-lg sm:text-xl font-bold text-slate-800 leading-relaxed">
+                                    Question text here...
+                                </h3>
+                                <div id="examOptionsContainer" class="space-y-3">
+                                    <!-- Options -->
+                                </div>
+                                <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                                    <button onclick="prevExamQuestion()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-5 py-2.5 rounded-xl transition-all text-sm">
+                                        <i class="fa-solid fa-arrow-left mr-1"></i> Previous
+                                    </button>
+                                    <button onclick="nextExamQuestion()" class="bg-pastel-600 hover:bg-pastel-700 text-white font-semibold px-6 py-2.5 rounded-xl transition-all shadow-sm text-sm">
+                                        Next <i class="fa-solid fa-arrow-right ml-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right 1 Col: Question Navigator Grid -->
+                        <div class="space-y-6">
+                            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="font-bold text-slate-800 text-sm">Question Navigator</h4>
+                                    <span id="examAnsweredCount" class="text-xs font-semibold text-slate-500">0/100 Answered</span>
+                                </div>
+                                <div id="examNavigatorGrid" class="grid grid-cols-5 gap-2 max-h-96 overflow-y-auto p-1 custom-scrollbar">
+                                    <!-- Populated dynamically -->
+                                </div>
+                                <button onclick="confirmSubmitExam()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow transition-all text-sm flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    <span>Submit Exam</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exam Result Screen -->
+                    <div id="examResultScreen" class="hidden bg-white rounded-2xl border border-slate-200 p-8 max-w-3xl mx-auto shadow-sm space-y-8">
+                        <div class="text-center space-y-3">
+                            <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-3xl mx-auto flex items-center justify-center text-3xl shadow-sm">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-800">Exam Completed!</h3>
+                            <p class="text-slate-500 text-sm">Here is your performance summary for the 100-question vocabulary test.</p>
+                        </div>
+
+                        <!-- Score Cards -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <p class="text-xs font-semibold text-slate-400 uppercase">Score (Scale 10)</p>
+                                <h4 id="resScore10" class="text-2xl font-bold text-pastel-700 mt-1">0.0</h4>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <p class="text-xs font-semibold text-slate-400 uppercase">Correct</p>
+                                <h4 id="resCorrect" class="text-2xl font-bold text-emerald-600 mt-1">0/100</h4>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <p class="text-xs font-semibold text-slate-400 uppercase">Accuracy</p>
+                                <h4 id="resAccuracy" class="text-2xl font-bold text-sky-600 mt-1">0%</h4>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <p class="text-xs font-semibold text-slate-400 uppercase">Time Taken</p>
+                                <h4 id="resTime" class="text-2xl font-bold text-slate-700 mt-1">00:00</h4>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center space-x-4 pt-4">
+                            <button onclick="switchTab('review'); initReviewMode();" class="bg-pastel-600 hover:bg-pastel-700 text-white font-semibold px-6 py-3 rounded-xl shadow transition-all text-sm flex items-center space-x-2">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                <span>Review Mistakes</span>
+                            </button>
+                            <button onclick="resetExamState()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-6 py-3 rounded-xl transition-all text-sm">
+                                Retake Exam
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= TAB 4: REVIEW MISTAKES ================= -->
+                <div id="view-review" class="tab-view hidden max-w-4xl mx-auto space-y-6">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">Mistakes & Marked Review Bank</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Practice questions you answered incorrectly or bookmarked for revision.</p>
+                        </div>
+                        <span id="reviewTabBadge" class="bg-rose-100 text-rose-700 font-bold px-3 py-1 rounded-full text-xs">0 questions</span>
+                    </div>
+
+                    <div id="reviewContainer" class="space-y-6">
+                        <!-- Dynamically populated or empty state -->
+                    </div>
+                </div>
+
+                <!-- ================= TAB 5: VOCABULARY BANK ================= -->
+                <div id="view-vocabulary" class="tab-view hidden max-w-6xl mx-auto space-y-6">
+                    <!-- Controls Bar -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-4">
+                        <div class="flex flex-wrap items-center gap-3 flex-1">
+                            <div class="relative flex-1 min-w-[240px]">
+                                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+                                <input type="text" id="vocabSearchInput" oninput="filterVocabBank()" placeholder="Search word, meaning, prefix..." class="w-full pl-10 pr-4 py-2.5 bg-slate-100 border border-slate-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-pastel-500">
+                            </div>
+                            <select id="vocabTopicFilter" onchange="filterVocabBank()" class="bg-slate-100 border border-slate-300 text-slate-800 text-sm font-semibold rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-pastel-500">
+                                <option value="all">All Topics (1–7)</option>
+                                <option value="1">Part 1: -ed / -ing Adjectives</option>
+                                <option value="2">Part 2: PRE- Prefixes</option>
+                                <option value="3">Part 3: DIS- Prefixes</option>
+                                <option value="4">Part 4: -OUS Adjectives</option>
+                                <option value="5">Part 5: -ION / -MENT Nouns</option>
+                                <option value="6">Part 6: -OLOGY / -LOGY</option>
+                                <option value="7">Part 7: EX- & Word Families</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="openFlashcardModal()" class="bg-pastel-600 hover:bg-pastel-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-sm text-sm flex items-center space-x-2">
+                                <i class="fa-solid fa-clone"></i>
+                                <span>Flashcards</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Vocabulary Grid -->
+                    <div id="vocabGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- ================= TAB 6: PROGRESS & ANALYTICS ================= -->
+                <div id="view-progress" class="tab-view hidden max-w-5xl mx-auto space-y-6">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-6">
+                        <h3 class="text-lg font-bold text-slate-800">Part-by-Part Performance Breakdown</h3>
+                        <div id="partProgressList" class="space-y-4">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- FLASHCARD MODAL -->
+    <div id="flashcardModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl space-y-6 relative">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <h3 class="font-bold text-lg text-slate-800 flex items-center space-x-2">
+                    <i class="fa-solid fa-clone text-pastel-600"></i>
+                    <span>Vocabulary Flashcards</span>
+                </h3>
+                <button onclick="closeFlashcardModal()" class="text-slate-400 hover:text-slate-700 text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Flashcard Card Container -->
+            <div onclick="flipFlashcard()" class="w-full h-64 bg-gradient-to-br from-slate-50 to-pastel-50 border-2 border-pastel-200 rounded-2xl p-6 flex flex-col justify-center items-center text-center cursor-pointer shadow-sm relative transition-all hover:shadow-md">
+                <span id="fcCardIndex" class="absolute top-4 left-4 text-xs font-semibold text-slate-400">Card 1 of 50</span>
+                <span id="fcStatusBadge" class="absolute top-4 right-4 text-xs font-bold px-2.5 py-1 rounded-full bg-slate-200 text-slate-700">Unknown</span>
+                
+                <div id="fcContent" class="space-y-3">
+                    <h2 id="fcWord" class="text-3xl font-extrabold text-slate-800">Exhausted</h2>
+                    <p id="fcIpa" class="text-sm text-slate-500 font-mono">/ɪɡˈzɔːstɪd/</p>
+                    <p id="fcHint" class="text-xs text-pastel-600 italic mt-2">(Click card to reveal meaning)</p>
+                </div>
+            </div>
+
+            <!-- Flashcard Controls -->
+            <div class="flex items-center justify-between pt-2">
+                <button onclick="prevFlashcard()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-4 py-2 rounded-xl text-sm">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Previous
+                </button>
+                <div class="flex space-x-2">
+                    <button onclick="markCurrentVocabKnown()" id="fcKnownBtn" class="bg-emerald-100 hover:bg-emerald-200 text-emerald-700 font-semibold px-4 py-2 rounded-xl text-sm">
+                        <i class="fa-solid fa-check mr-1"></i> Mark as Known
+                    </button>
+                </div>
+                <button onclick="nextFlashcard()" class="bg-pastel-600 hover:bg-pastel-700 text-white font-semibold px-4 py-2 rounded-xl text-sm">
+                    Next <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUBMIT EXAM CONFIRM MODAL -->
+    <div id="submitConfirmModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-6 text-center">
+            <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-2xl mx-auto flex items-center justify-center text-2xl">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-slate-800 mb-1">Submit Exam?</h3>
+                <p id="submitConfirmText" class="text-sm text-slate-500">You have answered 0 out of 100 questions. Are you sure you want to submit?</p>
+            </div>
+            <div class="flex space-x-3">
+                <button onclick="closeSubmitModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl text-sm">
+                    Continue Exam
+                </button>
+                <button onclick="executeExamSubmission()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow">
+                    Yes, Submit
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESET PROGRESS CONFIRM MODAL -->
+    <div id="resetModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-6 text-center">
+            <div class="w-16 h-16 bg-rose-100 text-rose-600 rounded-2xl mx-auto flex items-center justify-center text-2xl">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-slate-800 mb-1">Reset All Progress?</h3>
+                <p class="text-sm text-slate-500">This will clear all your saved quiz answers, exam histories, and vocabulary known statuses. This action cannot be undone.</p>
+            </div>
+            <div class="flex space-x-3">
+                <button onclick="closeResetModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl text-sm">
+                    Cancel
+                </button>
+                <button onclick="executeResetProgress()" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow">
+                    Reset Everything
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APP CODE -->
+    <script>
+        /* ==========================================================
+           1. DATA REPOSITORY - 100 QUESTIONS WITH DETAILED EXPLANATIONS
+           ========================================================== */
+        const questionsData = [
+            // PART 1: ADJECTIVES ENDING IN -ED / -ING (1-15)
+            {
+                id: 1, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "I felt extremely ______ after studying for five hours.",
+                options: ["exhausting", "exhausted", "exhaust", "exhaustion"],
+                correct: 1, // Index of B
+                explanationEn: "Exhausted (adjective) describes a person's feeling of extreme tiredness. Exhaust (verb), exhausting (adjective describing things that cause tiredness), exhaustion (noun).",
+                explanationVi: "Exhausted: kiệt sức. -ed diễn tả cảm xúc của bản thân người học."
+            },
+            {
+                id: 2, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "The documentary about wildlife was very ______.",
+                options: ["interested", "interest", "interesting", "interestingly"],
+                correct: 2,
+                explanationEn: "Interesting (adjective) describes a thing or documentary that causes interest. Interested is used for people's feelings.",
+                explanationVi: "Interesting: thú vị (dùng cho sự vật, sự việc gây ra sự thích thú)."
+            },
+            {
+                id: 3, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "She was ______ when she heard the unexpected news.",
+                options: ["surprising", "surprised", "surprise", "surprisingly"],
+                correct: 1,
+                explanationEn: "Surprised (adjective) describes how she felt upon hearing the news. Surprising describes the news itself.",
+                explanationVi: "Surprised: ngạc nhiên (cảm xúc của người khi nhận tin tức)."
+            },
+            {
+                id: 4, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "The instructions were so ______ that nobody understood them.",
+                options: ["confusing", "confused", "confuse", "confusion"],
+                correct: 0,
+                explanationEn: "Confusing (adjective) describes the instructions which caused confusion.",
+                explanationVi: "Confusing: gây khó hiểu, rối rắm (đặc điểm của hướng dẫn)."
+            },
+            {
+                id: 5, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "My little brother is ______ in learning foreign languages.",
+                options: ["interesting", "interested", "interest", "interests"],
+                correct: 1,
+                explanationEn: "Interested (adjective) is used in the structure 'to be interested in' to express personal interest.",
+                explanationVi: "Interested: quan tâm, thích thú (cấu trúc 'to be interested in')."
+            },
+            {
+                id: 6, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "It was an extremely ______ experience for everyone.",
+                options: ["frightened", "frightening", "frighten", "fright"],
+                correct: 1,
+                explanationEn: "Frightening (adjective) describes an experience that causes fear.",
+                explanationVi: "Frightening: đáng sợ, gây sợ hãi cho mọi người."
+            },
+            {
+                id: 7, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "I was really ______ because I couldn’t find my phone.",
+                options: ["worrying", "worry", "worried", "worries"],
+                correct: 2,
+                explanationEn: "Worried (adjective) expresses the speaker's state of anxiety or concern.",
+                explanationVi: "Worried: lo lắng (cảm xúc của người khi mất đồ)."
+            },
+            {
+                id: 8, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "The students found the examination quite ______.",
+                options: ["challenged", "challenging", "challenge", "challenges"],
+                correct: 1,
+                explanationEn: "Challenging (adjective) describes an exam that presents difficulties or tests ability.",
+                explanationVi: "Challenging: đầy thử thách, kích thích tư duy."
+            },
+            {
+                id: 9, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "He looked ______ after receiving the disappointing results.",
+                options: ["disappointing", "disappointed", "disappoint", "disappointment"],
+                correct: 1,
+                explanationEn: "Disappointed (adjective) describes his emotional state after bad news.",
+                explanationVi: "Disappointed: thất vọng (trạng thái cảm xúc của anh ấy)."
+            },
+            {
+                id: 10, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "This book is so ______ that I can’t stop reading it.",
+                options: ["fascinated", "fascinating", "fascinate", "fascination"],
+                correct: 1,
+                explanationEn: "Fascinating (adjective) describes a book that captures one's intense interest.",
+                explanationVi: "Fascinating: vô cùng hấp dẫn, lôi cuốn."
+            },
+            {
+                id: 11, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "We were ______ by the magician’s performance.",
+                options: ["amazed", "amazing", "amaze", "amazement"],
+                correct: 0,
+                explanationEn: "Amazed (adjective) expresses the audience's feeling of great wonder.",
+                explanationVi: "Amazed: ngạc nhiên, thán phục trước màn trình diễn."
+            },
+            {
+                id: 12, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "The long journey was extremely ______.",
+                options: ["tiring", "tired", "tire", "tires"],
+                correct: 0,
+                explanationEn: "Tiring (adjective) describes a journey that causes physical or mental fatigue.",
+                explanationVi: "Tiring: gây mệt mỏi (tính chất của chuyến đi dài)."
+            },
+            {
+                id: 13, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "I find it ______ when people talk loudly in the library.",
+                options: ["annoyed", "annoying", "annoyance", "annoy"],
+                correct: 1,
+                explanationEn: "Annoying (adjective) describes actions or situations that cause irritation.",
+                explanationVi: "Annoying: gây khó chịu, bực mình."
+            },
+            {
+                id: 14, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "She felt ______ because nobody invited her to the party.",
+                options: ["embarrassing", "embarrassed", "embarrass", "embarrassment"],
+                correct: 1,
+                explanationEn: "Embarrassed (adjective) describes her personal feeling of discomfort or shyness.",
+                explanationVi: "Embarrassed: ngượng ngùng, xấu hổ."
+            },
+            {
+                id: 15, part: 1, partName: "Part 1: Adjectives -ed / -ing",
+                question: "The news about the accident was truly ______.",
+                options: ["shocked", "shocking", "shock", "shockingly"],
+                correct: 1,
+                explanationEn: "Shocking (adjective) describes news that causes profound shock or dismay.",
+                explanationVi: "Shocking: gây sốc, bàng hoàng."
+            },
+
+            // PART 2: WORDS BEGINNING WITH PRE- (16-30)
+            {
+                id: 16, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "You should make a ______ before starting your project.",
+                options: ["preview", "preparation", "precaution", "prediction"],
+                correct: 1,
+                explanationEn: "Preparation (noun): the action or process of making ready for use or consideration. 'Make a preparation' or prepare before a project.",
+                explanationVi: "Preparation: sự chuẩn bị trước khi bắt đầu dự án."
+            },
+            {
+                id: 17, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "The students must ______ for the final examination.",
+                options: ["prepare", "prevent", "predict", "pretend"],
+                correct: 0,
+                explanationEn: "Prepare (verb): to make yourself or someone else ready for something.",
+                explanationVi: "Prepare: chuẩn bị cho kỳ thi cuối kỳ."
+            },
+            {
+                id: 18, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "The government introduced new measures to ______ environmental pollution.",
+                options: ["preserve", "prevent", "preview", "precede"],
+                correct: 1,
+                explanationEn: "Prevent (verb): to stop something from happening.",
+                explanationVi: "Prevent: ngăn chặn ô nhiễm môi trường."
+            },
+            {
+                id: 19, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "We need to take ______ against possible accidents.",
+                options: ["predictions", "precautions", "preferences", "preparations"],
+                correct: 1,
+                explanationEn: "Precautions (noun): measures taken in advance to prevent something dangerous, unpleasant, or inconvenient from happening.",
+                explanationVi: "Precautions: các biện pháp phòng ngừa, đề phòng."
+            },
+            {
+                id: 20, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "The teacher asked us to ______ the passage before answering the questions.",
+                options: ["preheat", "preview", "prevent", "prescribe"],
+                correct: 1,
+                explanationEn: "Preview (verb): to inspect or review beforehand.",
+                explanationVi: "Preview: xem trước, đọc lướt qua đoạn văn."
+            },
+            {
+                id: 21, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "Nobody could ______ what would happen in the future.",
+                options: ["preserve", "predict", "prepare", "precede"],
+                correct: 1,
+                explanationEn: "Predict (verb): to say or estimate that a specified thing will happen in the future.",
+                explanationVi: "Predict: dự đoán tương lai."
+            },
+            {
+                id: 22, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "The company requires employees to pay in ______.",
+                options: ["preview", "prevention", "advance", "preposition"],
+                correct: 2,
+                explanationEn: "Pay in advance (idiomatic phrase): to pay beforehand.",
+                explanationVi: "In advance: trả trước, thanh toán trước."
+            },
+            {
+                id: 23, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "Please read the ______ instructions carefully before using this machine.",
+                options: ["preliminary", "predictable", "previous", "precious"],
+                correct: 0,
+                explanationEn: "Preliminary (adjective): occurring as an action preceding or preparing for something fuller or more important.",
+                explanationVi: "Preliminary: sơ bộ, hướng dẫn mở đầu trước khi dùng máy."
+            },
+            {
+                id: 24, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "This building was constructed in the ______ century.",
+                options: ["prehistoric", "preceding", "preposition", "precautionary"],
+                correct: 1,
+                explanationEn: "Preceding (adjective): coming before something in time or position.",
+                explanationVi: "Preceding: thế kỷ trước đó, liền trước."
+            },
+            {
+                id: 25, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "We should ______ natural resources for future generations.",
+                options: ["preserve", "prevent", "pretend", "predict"],
+                correct: 0,
+                explanationEn: "Preserve (verb): to maintain something in its original or existing state.",
+                explanationVi: "Preserve: bảo tồn tài nguyên thiên nhiên."
+            },
+            {
+                id: 26, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "The doctor gave me a ______ for some medicine.",
+                options: ["prediction", "prescription", "preparation", "preference"],
+                correct: 1,
+                explanationEn: "Prescription (noun): a doctor's formal instruction for a medicine.",
+                explanationVi: "Prescription: đơn thuốc bác sĩ kê."
+            },
+            {
+                id: 27, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "I have a strong ______ for studying in the morning.",
+                options: ["precaution", "preference", "preview", "prediction"],
+                correct: 1,
+                explanationEn: "Preference (noun): a greater liking for one alternative over another.",
+                explanationVi: "Preference: sự ưu tiên, sở thích."
+            },
+            {
+                id: 28, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "The museum displays objects from ______ times.",
+                options: ["prehistoric", "predictable", "preliminary", "previous"],
+                correct: 0,
+                explanationEn: "Prehistoric (adjective): relating to the period before written records.",
+                explanationVi: "Prehistoric: thời tiền sử."
+            },
+            {
+                id: 29, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "The manager wants to ______ the meeting with a short introduction.",
+                options: ["precede", "prevent", "preserve", "pretend"],
+                correct: 0,
+                explanationEn: "Precede (verb): to come before something in time.",
+                explanationVi: "Precede: đi trước, mở đầu cuộc họp."
+            },
+            {
+                id: 30, part: 2, partName: "Part 2: Words Beginning with PRE-",
+                question: "He tried to ______ that he knew nothing about the problem.",
+                options: ["prepare", "pretend", "predict", "preserve"],
+                correct: 1,
+                explanationEn: "Pretend (verb): to speak and act as if something is true when it is not.",
+                explanationVi: "Pretend: giả vờ, ra vẻ như không biết gì."
+            },
+
+            // PART 3: WORDS BEGINNING WITH DIS- (31-45)
+            {
+                id: 31, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "I completely ______ with your opinion.",
+                options: ["disappear", "disagree", "disappoint", "discover"],
+                correct: 1,
+                explanationEn: "Disagree (verb): to have a different opinion. Prefix 'dis-' reverses 'agree'.",
+                explanationVi: "Disagree: không đồng ý, bất đồng quan điểm."
+            },
+            {
+                id: 32, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "The magician made the rabbit ______ suddenly.",
+                options: ["disconnect", "dislike", "disappear", "disagree"],
+                correct: 2,
+                explanationEn: "Disappear (verb): to cease to be visible.",
+                explanationVi: "Disappear: biến mất đột ngột."
+            },
+            {
+                id: 33, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "His rude behaviour may ______ his parents.",
+                options: ["disappoint", "discover", "dislike", "disappear"],
+                correct: 0,
+                explanationEn: "Disappoint (verb): to fail to fulfill the hopes or expectations of someone.",
+                explanationVi: "Disappoint: làm thất vọng bố mẹ."
+            },
+            {
+                id: 34, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "Please ______ your phone from the charger before leaving.",
+                options: ["disagree", "disconnect", "discover", "disappear"],
+                correct: 1,
+                explanationEn: "Disconnect (verb): to break the connection of a power supply or device.",
+                explanationVi: "Disconnect: ngắt kết nối bộ sạc."
+            },
+            {
+                id: 35, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "The police managed to ______ the truth about the crime.",
+                options: ["dislike", "disappoint", "discover", "disconnect"],
+                correct: 2,
+                explanationEn: "Discover (verb): to find out or uncover something.",
+                explanationVi: "Discover: khám phá, tìm ra sự thật."
+            },
+            {
+                id: 36, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "Many people ______ discrimination in the workplace.",
+                options: ["disagree", "dislike", "disappear", "discover"],
+                correct: 1,
+                explanationEn: "Dislike (verb): to feel distaste for or hostility toward.",
+                explanationVi: "Dislike: không thích, ghét sự phân biệt đối xử."
+            },
+            {
+                id: 37, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "The company decided to ______ the old computer system.",
+                options: ["discontinue", "disagree", "discover", "dislike"],
+                correct: 0,
+                explanationEn: "Discontinue (verb): to stop manufacturing or providing something.",
+                explanationVi: "Discontinue: ngừng sản xuất/sử dụng hệ thống cũ."
+            },
+            {
+                id: 38, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "You should not ______ people because of their appearance.",
+                options: ["disappoint", "disrespect", "disappear", "disconnect"],
+                correct: 1,
+                explanationEn: "Disrespect (verb): to show a lack of respect for someone.",
+                explanationVi: "Disrespect: không tôn trọng người khác."
+            },
+            {
+                id: 39, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "His lack of preparation was a serious ______.",
+                options: ["disadvantage", "disagreement", "discovery", "disappearance"],
+                correct: 0,
+                explanationEn: "Disadvantage (noun): an unfavorable circumstance or condition.",
+                explanationVi: "Disadvantage: bất lợi nghiêm trọng."
+            },
+            {
+                id: 40, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "There was a strong ______ between the two managers.",
+                options: ["disadvantage", "disagreement", "discovery", "disability"],
+                correct: 1,
+                explanationEn: "Disagreement (noun): lack of consensus or harmony.",
+                explanationVi: "Disagreement: sự bất đồng ý kiến."
+            },
+            {
+                id: 41, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "The students were asked to ______ the importance of regular exercise.",
+                options: ["disregard", "disconnect", "disappear", "disappoint"],
+                correct: 0,
+                explanationEn: "Disregard (verb): to pay no attention to; ignore.",
+                explanationVi: "Disregard: phớt lờ, coi thường."
+            },
+            {
+                id: 42, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "The new technology has many ______ compared with the old one.",
+                options: ["disadvantages", "discoveries", "disagreements", "disappointments"],
+                correct: 0,
+                explanationEn: "Disadvantages (noun, plural): drawbacks or unfavorable aspects.",
+                explanationVi: "Disadvantages: những điểm bất lợi."
+            },
+            {
+                id: 43, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "She felt ______ because nobody listened to her ideas.",
+                options: ["discouraged", "discovered", "disconnected", "disappeared"],
+                correct: 0,
+                explanationEn: "Discouraged (adjective): having lost confidence or enthusiasm.",
+                explanationVi: "Discouraged: chán nản, nhụt chí."
+            },
+            {
+                id: 44, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "We should never ______ the rules of the competition.",
+                options: ["disobey", "disappear", "discover", "disagree"],
+                correct: 0,
+                explanationEn: "Disobey (verb): to fail to obey rules or orders.",
+                explanationVi: "Disobey: không tuân thủ, chống lại luật lệ."
+            },
+            {
+                id: 45, part: 3, partName: "Part 3: Words Beginning with DIS-",
+                question: "The accident caused a lot of ______ to the local community.",
+                options: ["disadvantage", "discomfort", "discovery", "disagreement"],
+                correct: 1,
+                explanationEn: "Discomfort (noun): slight pain or psychological unease.",
+                explanationVi: "Discomfort: sự khó chịu, bất tiện cho cộng đồng."
+            },
+
+            // PART 4: WORDS ENDING IN -OUS (46-60)
+            {
+                id: 46, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "Smoking is extremely ______ to your health.",
+                options: ["danger", "dangerous", "dangerously", "endanger"],
+                correct: 1,
+                explanationEn: "Dangerous (adjective ending in -ous): able or likely to cause harm.",
+                explanationVi: "Dangerous: nguy hiểm cho sức khỏe."
+            },
+            {
+                id: 47, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "The Amazon rainforest is home to numerous ______ species.",
+                options: ["poison", "poisonous", "poisoned", "poisoning"],
+                correct: 1,
+                explanationEn: "Poisonous (adjective ending in -ous): containing poison that can kill or injure.",
+                explanationVi: "Poisonous: có độc, chứa độc tố."
+            },
+            {
+                id: 48, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "She is a very ______ person who always thinks about others.",
+                options: ["generous", "generosity", "generously", "generate"],
+                correct: 0,
+                explanationEn: "Generous (adjective ending in -ous): showing kindness and willingness to give.",
+                explanationVi: "Generous: rộng lượng, hào phóng."
+            },
+            {
+                id: 49, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "The road becomes ______ during heavy rain.",
+                options: ["hazard", "hazardous", "hazardously", "hazardless"],
+                correct: 1,
+                explanationEn: "Hazardous (adjective ending in -ous): risky; dangerous.",
+                explanationVi: "Hazardous: đầy rủi ro, nguy hiểm khi trời mưa."
+            },
+            {
+                id: 50, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "The company has made ______ improvements to its services.",
+                options: ["enormous", "enormously", "enormousness", "enormity"],
+                correct: 0,
+                explanationEn: "Enormous (adjective ending in -ous): very large in size or quantity.",
+                explanationVi: "Enormous: to lớn, khổng lồ (cải tiến đáng kể)."
+            },
+            {
+                id: 51, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "He is famous for his ______ sense of humour.",
+                options: ["humour", "humorous", "humourlessly", "humorist"],
+                correct: 1,
+                explanationEn: "Humorous (adjective ending in -ous): causing laughter and amusement.",
+                explanationVi: "Humorous: hài hước, vui tính."
+            },
+            {
+                id: 52, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "The scientist made an ______ discovery.",
+                options: ["marvelous", "marvellously", "marvel", "marvellousness"],
+                correct: 0,
+                explanationEn: "Marvelous (adjective ending in -ous): causing great wonder; extraordinary.",
+                explanationVi: "Marvelous: tuyệt vời, kỳ diệu."
+            },
+            {
+                id: 53, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "It was ______ of him to help the poor family.",
+                options: ["courage", "courageous", "courageously", "encourage"],
+                correct: 1,
+                explanationEn: "Courageous (adjective ending in -ous): brave.",
+                explanationVi: "Courageous: dũng cảm, gan dạ."
+            },
+            {
+                id: 54, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "There are ______ reasons why students should learn foreign languages.",
+                options: ["numerous", "number", "numerically", "numerical"],
+                correct: 0,
+                explanationEn: "Numerous (adjective ending in -ous): great in number; many.",
+                explanationVi: "Numerous: rất nhiều, vô số lý do."
+            },
+            {
+                id: 55, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "The food contained a ______ substance that made several people ill.",
+                options: ["poison", "poisonous", "poisoned", "poisoning"],
+                correct: 1,
+                explanationEn: "Poisonous (adjective): toxic substance.",
+                explanationVi: "Poisonous: chất có độc làm nhiều người ốm."
+            },
+            {
+                id: 56, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "The police are investigating a ______ incident.",
+                options: ["suspicious", "suspicion", "suspiciously", "suspect"],
+                correct: 0,
+                explanationEn: "Suspicious (adjective ending in -ous): having or showing a cautious distrust of someone or something.",
+                explanationVi: "Suspicious: khả nghi, đáng ngờ."
+            },
+            {
+                id: 57, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "The research requires a ______ examination of the available evidence.",
+                options: ["rigor", "rigorous", "rigorously", "rigour"],
+                correct: 1,
+                explanationEn: "Rigorous (adjective ending in -ous): extremely thorough and careful.",
+                explanationVi: "Rigorous: chặt chẽ, nghiêm ngặt."
+            },
+            {
+                id: 58, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "The country has a ______ cultural heritage.",
+                options: ["glorious", "glory", "gloriously", "glorify"],
+                correct: 0,
+                explanationEn: "Glorious (adjective ending in -ous): having, worthy of, or bringing fame or admiration.",
+                explanationVi: "Glorious: huy hoàng, vẻ vang."
+            },
+            {
+                id: 59, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "It is ______ to drive without wearing a seat belt.",
+                options: ["hazard", "hazardous", "hazardously", "hazardless"],
+                correct: 1,
+                explanationEn: "Hazardous (adjective ending in -ous): dangerous.",
+                explanationVi: "Hazardous: nguy hiểm khi không thắt dây an toàn."
+            },
+            {
+                id: 60, part: 4, partName: "Part 4: Words Ending in -OUS",
+                question: "The children were excited about the ______ opportunity to visit the museum.",
+                options: ["adventurous", "adventure", "adventurously", "adventurer"],
+                correct: 0,
+                explanationEn: "Adventurous (adjective ending in -ous): willing to take risks or try out new methods.",
+                explanationVi: "Adventurous: phiêu lưu, thích trải nghiệm."
+            },
+
+            // PART 5: WORDS ENDING IN -ION / -MENT (61-80)
+            {
+                id: 61, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "Good ______ is essential for successful teamwork.",
+                options: ["communicate", "communication", "communicative", "communicatively"],
+                correct: 1,
+                explanationEn: "Communication (noun ending in -ion): the imparting or exchanging of information.",
+                explanationVi: "Communication: sự giao tiếp tốt là điều cốt lõi."
+            },
+            {
+                id: 62, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The ______ of the new shopping centre took two years.",
+                options: ["develop", "development", "developing", "developed"],
+                correct: 1,
+                explanationEn: "Development (noun ending in -ment): the process of developing or being developed.",
+                explanationVi: "Development: sự phát triển, xây dựng trung tâm mua sắm."
+            },
+            {
+                id: 63, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "We need to make an important ______ before Friday.",
+                options: ["decide", "decision", "decisive", "decisively"],
+                correct: 1,
+                explanationEn: "Decision (noun ending in -sion/-ion): a conclusion or resolution reached after consideration.",
+                explanationVi: "Decision: quyết định quan trọng."
+            },
+            {
+                id: 64, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The teacher gave us a clear ______ of the grammar rule.",
+                options: ["explain", "explanation", "explanatory", "explained"],
+                correct: 1,
+                explanationEn: "Explanation (noun ending in -ation): a statement or account that makes something clear.",
+                explanationVi: "Explanation: lời giải thích rõ ràng."
+            },
+            {
+                id: 65, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The company announced the ______ of a new product.",
+                options: ["introduce", "introduction", "introductory", "introduced"],
+                correct: 1,
+                explanationEn: "Introduction (noun ending in -tion): the action of introducing something.",
+                explanationVi: "Introduction: sự ra mắt sản phẩm mới."
+            },
+            {
+                id: 66, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "Her ______ helped her achieve excellent results.",
+                options: ["improve", "improvement", "improving", "improved"],
+                correct: 1,
+                explanationEn: "Improvement (noun ending in -ment): the action of improving or being improved.",
+                explanationVi: "Improvement: sự tiến bộ, cải thiện."
+            },
+            {
+                id: 67, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The government is responsible for the ______ of public services.",
+                options: ["manage", "management", "manager", "manageable"],
+                correct: 1,
+                explanationEn: "Management (noun ending in -ment): the process of dealing with or controlling things.",
+                explanationVi: "Management: sự quản lý dịch vụ công."
+            },
+            {
+                id: 68, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The ______ of the meeting surprised everyone.",
+                options: ["cancel", "cancellation", "cancelled", "cancelling"],
+                correct: 1,
+                explanationEn: "Cancellation (noun ending in -ation): the action of cancelling something.",
+                explanationVi: "Cancellation: việc hủy cuộc họp."
+            },
+            {
+                id: 69, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The students showed great ______ in completing the assignment.",
+                options: ["achieve", "achievement", "achievable", "achieved"],
+                correct: 1,
+                explanationEn: "Achievement (noun ending in -ment): a thing done successfully.",
+                explanationVi: "Achievement: thành tựu, sự thành công."
+            },
+            {
+                id: 70, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The ______ of the environment should be everyone’s responsibility.",
+                options: ["protect", "protection", "protective", "protected"],
+                correct: 1,
+                explanationEn: "Protection (noun ending in -tion): the action of protecting or the state of being protected.",
+                explanationVi: "Protection: sự bảo vệ môi trường."
+            },
+            {
+                id: 71, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The teacher made an important ______ about the examination.",
+                options: ["announce", "announcement", "announcer", "announcing"],
+                correct: 1,
+                explanationEn: "Announcement (noun ending in -ment): a public and formal statement.",
+                explanationVi: "Announcement: thông báo quan trọng."
+            },
+            {
+                id: 72, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "We need your ______ before making any changes.",
+                options: ["agree", "agreement", "agreeable", "agreed"],
+                correct: 1,
+                explanationEn: "Agreement (noun ending in -ment): harmony or accordance in opinion or feeling.",
+                explanationVi: "Agreement: sự đồng thuận, thỏa thuận."
+            },
+            {
+                id: 73, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The ______ of the new policy will begin next month.",
+                options: ["implement", "implementation", "implemented", "implementing"],
+                correct: 1,
+                explanationEn: "Implementation (noun ending in -ation): the process of putting a decision or plan into effect.",
+                explanationVi: "Implementation: sự thi hành, thực hiện chính sách mới."
+            },
+            {
+                id: 74, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The students received a lot of ______ from their teacher.",
+                options: ["encourage", "encouragement", "encouraging", "encouraged"],
+                correct: 1,
+                explanationEn: "Encouragement (noun ending in -ment): the action of giving someone support or confidence.",
+                explanationVi: "Encouragement: sự khích lệ, động viên từ giáo viên."
+            },
+            {
+                id: 75, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The ______ of the problem requires careful analysis.",
+                options: ["solve", "solution", "solvable", "solved"],
+                correct: 1,
+                explanationEn: "Solution (noun ending in -tion): a means of solving a problem.",
+                explanationVi: "Solution: giải pháp cho vấn đề."
+            },
+            {
+                id: 76, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The company made a significant ______ in technology.",
+                options: ["invest", "investment", "investor", "invested"],
+                correct: 1,
+                explanationEn: "Investment (noun ending in -ment): the action or process of investing money for profit.",
+                explanationVi: "Investment: khoản đầu tư công nghệ."
+            },
+            {
+                id: 77, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "Regular exercise contributes to the ______ of good health.",
+                options: ["maintain", "maintenance", "maintained", "maintaining"],
+                correct: 1,
+                explanationEn: "Maintenance (noun ending in -ance/-ment): the process of preserving something in good condition.",
+                explanationVi: "Maintenance: sự duy trì sức khỏe tốt."
+            },
+            {
+                id: 78, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The ______ of the building was completed last year.",
+                options: ["construct", "construction", "constructive", "constructed"],
+                correct: 1,
+                explanationEn: "Construction (noun ending in -tion): the action of building something.",
+                explanationVi: "Construction: việc xây dựng tòa nhà."
+            },
+            {
+                id: 79, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "The school organised a special ______ for new students.",
+                options: ["orient", "orientation", "oriented", "orienting"],
+                correct: 1,
+                explanationEn: "Orientation (noun ending in -ation): an introduction, as to guide one in adjusting to new surroundings.",
+                explanationVi: "Orientation: buổi định hướng cho học sinh mới."
+            },
+            {
+                id: 80, part: 5, partName: "Part 5: Words Ending in -ION / -MENT",
+                question: "His ______ to the company has been recognised by the manager.",
+                options: ["commit", "commitment", "committed", "committing"],
+                correct: 1,
+                explanationEn: "Commitment (noun ending in -ment): the state or quality of being dedicated to a cause.",
+                explanationVi: "Commitment: sự tận tụy, cam kết với công ty."
+            },
+
+            // PART 6: WORDS ENDING IN -OLOGY / -LOGY (81-90)
+            {
+                id: 81, part: 6, partName: "Part 6: Words Ending in -OLOGY / -LOGY",
+                question: "The study of living organisms is called ______.",
+                options: ["geology", "biology", "psychology", "sociology"],
+                correct: 1,
+                explanationEn: "Biology (-ology: study of + bio: life): the scientific study of life and living organisms.",
+                explanationVi: "Biology: sinh học (nghiên cứu về sinh vật sống)."
+            },
+            {
+                id: 82, part: 6, partName: "Part 6: Words Ending in -OLOGY / -LOGY",
+                question: "______ is the scientific study of the human mind and behaviour.",
+                options: ["Psychology", "Biology", "Ecology", "Archaeology"],
+                correct: 0,
+                explanationEn: "Psychology (-ology: study of + psycho: mind): the study of mind and behavior.",
+                explanationVi: "Psychology: tâm lý học."
+            },
+            {
+                id: 83, part: 6, partName: "Part 6: Words Ending in -OLOGY / -LOGY",
+                question: "The study of the Earth, rocks and minerals is known as ______.",
+                options: ["zoology", "sociology", "geology", "technology"],
+                correct: 2,
+                explanationEn: "Geology (-ology: study of + geo: earth): the science that deals with the earth's physical structure.",
+                    explanationVi: "Geology: địa chất học."
+            },
+            {
+                id: 84, part: 6, partName: "Part 6: Words Ending in -OLOGY / -LOGY",
+                question: "______ focuses on the relationship between living things and their environment.",
+                options: ["Biology", "Ecology", "Psychology", "Theology"],
+                correct: 1,
+                explanationEn: "Ecology (-ology: study of + eco: environment): branch of biology dealing with relations of organisms to their environment.",
+                explanationVi: "Ecology: sinh thái học."
+            },
+            {
+                id: 85, part: 6, partName: "Part 6: Words Ending in -OLOGY / -LOGY",
+                question: "The study of human society and social relationships is called ______.",
+                options: ["sociology", "geology", "zoology", "mythology"],
+                correct: 0,
+                explanationEn: "Sociology (-ology: study of + socio: society): the study of the development, structure, and functioning of human society.",
+                explanationVi: "Sociology: xã hội học."
+            },
+            {
+                id: 86, part: 6, partName: "Part 6: Words Ending in -OLOGY / -LOGY",
+                question: "Scientists who study animals work in the field of ______.",
+                options: ["archaeology", "zoology", "technology", "psychology"],
+                correct: 1,
+                explanationEn: "Zoology (-ology: study of + zoo: animals): the scientific study of the behavior, structure, and physiology of animals.",
+                explanationVi: "Zoology: động vật học."
+            },
+            {
+                id: 87, part: 6, partName: "Part 6: Words Ending in -OLOGY / -LOGY",
+                question: "______ is the study of ancient societies through their buildings and objects.",
+                options: ["Biology", "Ecology", "Archaeology", "Sociology"],
+                correct: 2,
+                explanationEn: "Archaeology (-ology: study of + archaeo: ancient): the study of human history and prehistory through excavation.",
+                explanationVi: "Archaeology: khảo cổ học."
+            },
+            {
+                id: 88, part: 6, partName: "Part 6: Words Ending in -OLOGY / -LOGY",
+                question: "The study and application of scientific knowledge for practical purposes is called ______.",
+                options: ["mythology", "technology", "theology", "geology"],
+                correct: 1,
+                explanationEn: "Technology: machinery and devices developed from scientific knowledge.",
+                explanationVi: "Technology: công nghệ học."
+            },
+            {
+                id: 89, part: 6, partName: "Part 6: Words Ending in -OLOGY / -LOGY",
+                question: "______ is the study of myths and traditional stories.",
+                options: ["Mythology", "Psychology", "Zoology", "Biology"],
+                correct: 0,
+                explanationEn: "Mythology: a collection of myths or traditional stories.",
+                explanationVi: "Mythology: thần thoại học."
+            },
+            {
+                id: 90, part: 6, partName: "Part 6: Words Ending in -OLOGY / -LOGY",
+                question: "The study of religion and religious beliefs is known as ______.",
+                options: ["ecology", "theology", "geology", "sociology"],
+                correct: 1,
+                explanationEn: "Theology (-ology: study of + theo: god/religion): the study of the divine and religion.",
+                explanationVi: "Theology: thần học."
+            },
+
+            // PART 7: PREFIX EX- & WORD FAMILIES (91-100)
+            {
+                id: 91, part: 7, partName: "Part 7: Prefix EX- & Word Families",
+                question: "My ______ boyfriend works in London.",
+                options: ["extra", "former", "external", "excellent"],
+                correct: 1,
+                explanationEn: "Ex- (prefix meaning former): ex-boyfriend means a former boyfriend.",
+                explanationVi: "Ex- (cũ, trước đây): bạn trai cũ."
+            },
+            {
+                id: 92, part: 7, partName: "Part 7: Prefix EX- & Word Families",
+                question: "The company decided to ______ its products to other countries.",
+                options: ["export", "express", "expose", "exchange"],
+                correct: 0,
+                explanationEn: "Export (prefix ex- meaning out + port meaning carry): to send goods to other countries for sale.",
+                explanationVi: "Export: xuất khẩu sản phẩm ra nước ngoài."
+            },
+            {
+                id: 93, part: 7, partName: "Part 7: Prefix EX- & Word Families",
+                question: "We need to ______ the main ideas from this long article.",
+                options: ["exclude", "extract", "excuse", "expand"],
+                correct: 1,
+                explanationEn: "Extract (prefix ex- meaning out + tract meaning pull): to pull out or remove.",
+                explanationVi: "Extract: trích xuất, rút ra ý chính."
+            },
+            {
+                id: 94, part: 7, partName: "Part 7: Prefix EX- & Word Families",
+                question: "Please ______ your opinion clearly during the discussion.",
+                options: ["express", "export", "expire", "exclude"],
+                correct: 0,
+                explanationEn: "Express (verb): to convey thoughts or opinions clearly.",
+                explanationVi: "Express: bày tỏ, diễn đạt quan điểm."
+            },
+            {
+                id: 95, part: 7, partName: "Part 7: Prefix EX- & Word Families",
+                question: "The word “ex-president” refers to someone who ______.",
+                options: ["is currently the president", "was the president in the past", "want to become president", "works for the president"],
+                correct: 1,
+                explanationEn: "Ex- prefix indicates a former title or position.",
+                explanationVi: "Ex-president: cựu tổng thống (người từng giữ chức vụ trong quá khứ)."
+            },
+            {
+                id: 96, part: 7, partName: "Part 7: Prefix EX- & Word Families",
+                question: "She speaks English with great ______.",
+                options: ["fluent", "fluency", "fluently", "influence"],
+                correct: 1,
+                explanationEn: "Fluency (noun): the quality or condition of being fluent in a language.",
+                explanationVi: "Fluency: sự trôi chảy khi nói tiếng Anh."
+            },
+            {
+                id: 97, part: 7, partName: "Part 7: Prefix EX- & Word Families",
+                question: "The teacher was impressed by his ______.",
+                options: ["create", "creative", "creativity", "creatively"],
+                correct: 2,
+                explanationEn: "Creativity (noun ending in -ity): the use of imagination or original ideas.",
+                explanationVi: "Creativity: tính sáng tạo."
+            },
+            {
+                id: 98, part: 7, partName: "Part 7: Prefix EX- & Word Families",
+                question: "Regular exercise can ______ your physical health.",
+                options: ["improvement", "improved", "improving", "improve"],
+                correct: 3,
+                explanationEn: "Improve (verb): modal verb 'can' is followed by the base form of the verb.",
+                explanationVi: "Improve (động từ nguyên thể đi sau modal verb 'can'): cải thiện."
+            },
+            {
+                id: 99, part: 7, partName: "Part 7: Prefix EX- & Word Families",
+                question: "The manager was very ______ when dealing with difficult situations.",
+                options: ["profession", "professional", "professionally", "professionalism"],
+                correct: 1,
+                explanationEn: "Professional (adjective): exhibiting a courteous, conscientious, and generally businesslike manner.",
+                explanationVi: "Professional: chuyên nghiệp."
+            },
+            {
+                id: 100, part: 7, partName: "Part 7: Prefix EX- & Word Families",
+                question: "His hard work and determination contributed to his ______.",
+                options: ["succeed", "successful", "successfully", "success"],
+                correct: 3,
+                explanationEn: "Success (noun): the accomplishment of an aim or purpose, following possessive adjective 'his'.",
+                explanationVi: "Success (danh từ đứng sau tính từ sở hữu 'his'): sự thành công."
+            }
+        ];
+
+        /* ==========================================================
+           2. VOCABULARY BANK REPOSITORY (50+ Rich Items)
+           ========================================================== */
+        const vocabBankData = [
+            { word: "Exhausted", pos: "Adjective", ipa: "/ɪɡˈzɔːstɪd/", meaning: "Kiệt sức, mệt lử", def: "Extremely tired physically or mentally.", example: "I felt extremely exhausted after studying for five hours.", family: "Exhaust (v), Exhaustion (n), Exhausting (adj)", topic: 1, prefixSuffix: "Suffix: -ed" },
+            { word: "Interesting", pos: "Adjective", ipa: "/ˈɪntrəstɪŋ/", meaning: "Thú vị", def: "Arousing curiosity or interest.", example: "The documentary about wildlife was very interesting.", family: "Interest (n/v), Interested (adj)", topic: 1, prefixSuffix: "Suffix: -ing" },
+            { word: "Surprised", pos: "Adjective", ipa: "/səˈpraɪzd/", meaning: "Ngạc nhiên", def: "Feeling or showing surprise.", example: "She was surprised when she heard the unexpected news.", family: "Surprise (n/v), Surprising (adj)", topic: 1, prefixSuffix: "Suffix: -ed" },
+            { word: "Confusing", pos: "Adjective", ipa: "/kənˈfjuːzɪŋ/", meaning: "Gây khó hiểu, rối rắm", def: "Hard to understand; bewildering.", example: "The instructions were so confusing that nobody understood them.", family: "Confuse (v), Confused (adj), Confusion (n)", topic: 1, prefixSuffix: "Suffix: -ing" },
+            { word: "Frightening", pos: "Adjective", ipa: "/ˈfraɪtnɪŋ/", meaning: "Đáng sợ", def: "Making someone afraid or anxious.", example: "It was an extremely frightening experience for everyone.", family: "Frighten (v), Frightened (adj)", topic: 1, prefixSuffix: "Suffix: -ing" },
+            { word: "Preparation", pos: "Noun", ipa: "/ˌprepəˈreɪʃn/", meaning: "Sự chuẩn bị", def: "The action of making ready for use or consideration.", example: "You should make a preparation before starting your project.", family: "Prepare (v), Preparatory (adj)", topic: 2, prefixSuffix: "Prefix: Pre- / Suffix: -ion" },
+            { word: "Prevent", pos: "Verb", ipa: "/prɪˈvent/", meaning: "Ngăn chặn", def: "To stop something from happening.", example: "The government introduced new measures to prevent environmental pollution.", family: "Prevention (n), Preventive (adj)", topic: 2, prefixSuffix: "Prefix: Pre-" },
+            { word: "Precautions", pos: "Noun", ipa: "/prɪˈkɔːʃnz/", meaning: "Biện pháp phòng ngừa", def: "Measures taken in advance to prevent danger.", example: "We need to take precautions against possible accidents.", family: "Precautionary (adj)", topic: 2, prefixSuffix: "Prefix: Pre-" },
+            { word: "Preview", pos: "Verb/Noun", ipa: "/ˈpriːvjuː/", meaning: "Xem trước", def: "An inspection or evaluation beforehand.", example: "The teacher asked us to preview the passage.", family: "Preview (v/n)", topic: 2, prefixSuffix: "Prefix: Pre-" },
+            { word: "Predict", pos: "Verb", ipa: "/prɪˈdɪkt/", meaning: "Dự đoán", def: "Estimate that a specified thing will happen in the future.", example: "Nobody could predict what would happen.", family: "Prediction (n), Predictable (adj)", topic: 2, prefixSuffix: "Prefix: Pre-" },
+            { word: "Disagree", pos: "Verb", ipa: "/ˌdɪsəˈɡriː/", meaning: "Bất đồng, không đồng ý", def: "Have a different opinion.", example: "I completely disagree with your opinion.", family: "Agreement (n), Disagreement (n)", topic: 3, prefixSuffix: "Prefix: Dis-" },
+            { word: "Disappear", pos: "Verb", ipa: "/ˌdɪsəˈpɪə(r)/", meaning: "Biến mất", def: "Cease to be visible.", example: "The magician made the rabbit disappear suddenly.", family: "Disappearance (n)", topic: 3, prefixSuffix: "Prefix: Dis-" },
+            { word: "Disconnect", pos: "Verb", ipa: "/ˌdɪskəˈnekt/", meaning: "Ngắt kết nối", def: "Break the connection of a power supply.", example: "Please disconnect your phone from the charger.", family: "Connection (n)", topic: 3, prefixSuffix: "Prefix: Dis-" },
+            { word: "Discover", pos: "Verb", ipa: "/dɪˈskʌvə(r)/", meaning: "Khám phá, tìm ra", def: "Find out or uncover.", example: "The police managed to discover the truth.", family: "Discovery (n)", topic: 3, prefixSuffix: "Prefix: Dis-" },
+            { word: "Disadvantage", pos: "Noun", ipa: "/ˌdɪsədˈvɑːntɪdʒ/", meaning: "Bất lợi", def: "An unfavorable circumstance.", example: "His lack of preparation was a serious disadvantage.", family: "Advantage (n)", topic: 3, prefixSuffix: "Prefix: Dis-" },
+            { word: "Dangerous", pos: "Adjective", ipa: "/ˈdeɪndʒərəs/", meaning: "Nguy hiểm", def: "Able or likely to cause harm.", example: "Smoking is extremely dangerous to your health.", family: "Danger (n), Dangerously (adv)", topic: 4, prefixSuffix: "Suffix: -ous" },
+            { word: "Poisonous", pos: "Adjective", ipa: "/ˈpɔɪzənəs/", meaning: "Có độc", def: "Containing poison.", example: "The Amazon rainforest is home to numerous poisonous species.", family: "Poison (n/v)", topic: 4, prefixSuffix: "Suffix: -ous" },
+            { word: "Generous", pos: "Adjective", ipa: "/ˈdʒenərəs/", meaning: "Rộng lượng, hào phóng", def: "Showing kindness and willingness to give.", example: "She is a very generous person.", family: "Generosity (n), Generously (adv)", topic: 4, prefixSuffix: "Suffix: -ous" },
+            { word: "Hazardous", pos: "Adjective", ipa: "/ˈhæzədəs/", meaning: "Đầy rủi ro, nguy hiểm", def: "Risky; dangerous.", example: "The road becomes hazardous during heavy rain.", family: "Hazard (n)", topic: 4, prefixSuffix: "Suffix: -ous" },
+            { word: "Enormous", pos: "Adjective", ipa: "/ɪˈnɔːməs/", meaning: "To lớn, khổng lồ", def: "Very large in size or quantity.", example: "The company has made enormous improvements.", family: "Enormously (adv)", topic: 4, prefixSuffix: "Suffix: -ous" },
+            { word: "Communication", pos: "Noun", ipa: "/kəˌmjuːnɪˈkeɪʃn/", meaning: "Sự giao tiếp", def: "Exchanging information.", example: "Good communication is essential for teamwork.", family: "Communicate (v), Communicative (adj)", topic: 5, prefixSuffix: "Suffix: -ion" },
+            { word: "Development", pos: "Noun", ipa: "/dɪˈveləpmənt/", meaning: "Sự phát triển", def: "The process of developing.", example: "The development of the new shopping centre took two years.", family: "Develop (v), Developed (adj)", topic: 5, prefixSuffix: "Suffix: -ment" },
+            { word: "Explanation", pos: "Noun", ipa: "/ˌekspləˈneɪʃn/", meaning: "Lời giải thích", def: "A statement that makes something clear.", example: "The teacher gave us a clear explanation.", family: "Explain (v)", topic: 5, prefixSuffix: "Suffix: -ation" },
+            { word: "Achievement", pos: "Noun", ipa: "/əˈtʃiːvmənt/", meaning: "Thành tựu", def: "A thing done successfully.", example: "The students showed great achievement.", family: "Achieve (v)", topic: 5, prefixSuffix: "Suffix: -ment" },
+            { word: "Biology", pos: "Noun", ipa: "/baɪˈɒlədʒi/", meaning: "Sinh học", def: "The scientific study of life.", example: "The study of living organisms is called biology.", family: "Biologist (n), Biological (adj)", topic: 6, prefixSuffix: "Suffix: -ology" },
+            { word: "Psychology", pos: "Noun", ipa: "/saɪˈkɒlədʒi/", meaning: "Tâm lý học", def: "The scientific study of the human mind.", example: "Psychology is the scientific study of human mind.", family: "Psychologist (n), Psychological (adj)", topic: 6, prefixSuffix: "Suffix: -ology" },
+            { word: "Geology", pos: "Noun", ipa: "/dʒiˈɒlədʒi/", meaning: "Địa chất học", def: "The study of the Earth and rocks.", example: "Geology studies rocks and minerals.", family: "Geologist (n)", topic: 6, prefixSuffix: "Suffix: -ology" },
+            { word: "Ecology", pos: "Noun", ipa: "/iˈkɒlədʒi/", meaning: "Sinh thái học", def: "Study of relationships between organisms and environment.", example: "Ecology focuses on environment.", family: "Ecologist (n), Ecological (adj)", topic: 6, prefixSuffix: "Suffix: -ology" },
+            { word: "Export", pos: "Verb", ipa: "/ˈekspɔːt/", meaning: "Xuất khẩu", def: "Send goods to other countries.", example: "The company decided to export its products.", family: "Exporter (n), Exportation (n)", topic: 7, prefixSuffix: "Prefix: Ex-" },
+            { word: "Extract", pos: "Verb", ipa: "/ɪkˈstrækt/", meaning: "Trích xuất, rút ra", def: "Pull out or remove.", example: "We need to extract the main ideas.", family: "Extraction (n)", topic: 7, prefixSuffix: "Prefix: Ex-" },
+            { word: "Fluency", pos: "Noun", ipa: "/ˈfluːənsi/", meaning: "Sự trôi chảy", def: "Ability to speak a language smoothly.", example: "She speaks English with great fluency.", family: "Fluent (adj), Fluently (adv)", topic: 7, prefixSuffix: "Suffix: -cy" },
+            { word: "Creativity", pos: "Noun", ipa: "/ˌkriːeɪˈtɪvəti/", meaning: "Tính sáng tạo", def: "Use of imagination or original ideas.", example: "The teacher was impressed by his creativity.", family: "Create (v), Creative (adj)", topic: 7, prefixSuffix: "Suffix: -ity" }
+        ];
+
+        /* ==========================================================
+           3. APPLICATION STATE & PERSISTENCE (LocalStorage)
+           ========================================================== */
+        let state = {
+            currentTab: 'dashboard',
+            practiceIndex: 0,
+            practicePartFilter: 0,
+            practiceFilteredQuestions: [...questionsData],
+            userAnswers: {}, // { questionId: selectedOptionIndex }
+            examActive: false,
+            examTimerSeconds: 75 * 60,
+            examTimerInterval: null,
+            examCurrentIndex: 0,
+            examAnswers: {},
+            examSubmitted: false,
+            examResult: null,
+            markedQuestions: [], // array of question IDs
+            vocabKnown: {}, // { wordStr: true/false }
+            flashcardIndex: 0,
+            flashcardFlipped: false
+        };
+
+        function saveStateToLocalStorage() {
+            localStorage.setItem('vocabMaster_state', JSON.stringify({
+                userAnswers: state.userAnswers,
+                markedQuestions: state.markedQuestions,
+                vocabKnown: state.vocabKnown,
+                examResult: state.examResult
+            }));
+        }
+
+        function loadStateFromLocalStorage() {
+            const saved = localStorage.getItem('vocabMaster_state');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    state.userAnswers = parsed.userAnswers || {};
+                    state.markedQuestions = parsed.markedQuestions || [];
+                    state.vocabKnown = parsed.vocabKnown || {};
+                    state.examResult = parsed.examResult || null;
+                } catch (e) { console.error(e); }
+            }
+        }
+
+        /* ==========================================================
+           4. INITIALIZATION & NAVIGATION
+           ========================================================== */
+        window.addEventListener('DOMContentLoaded', () => {
+            loadStateFromLocalStorage();
+            initDashboard();
+            initPracticeMode();
+            initVocabBank();
+            updateReviewCountBadge();
+            
+            // Handle browser navigation or tab restore
+            switchTab('dashboard');
+        });
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
+
+        function switchTab(tabId) {
+            state.currentTab = tabId;
+            document.querySelectorAll('.tab-view').forEach(el => el.classList.add('hidden'));
+            const targetView = document.getElementById(`view-${tabId}`);
+            if (targetView) targetView.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-white');
+                btn.classList.add('text-slate-300');
+                if (btn.getAttribute('data-target') === tabId) {
+                    btn.classList.add('bg-slate-800', 'text-white');
+                    btn.classList.remove('text-slate-300');
+                }
+            });
+
+            // Update Header Title
+            const titles = {
+                dashboard: 'Dashboard',
+                practice: 'Practice Mode',
+                exam: 'Exam Mode',
+                review: 'Review Mistakes & Marked',
+                vocabulary: 'Vocabulary Bank & Flashcards',
+                progress: 'Detailed Progress Analytics'
+            };
+            document.getElementById('pageTitle').innerText = titles[tabId] || 'Dashboard';
+
+            // Specific tab initializers
+            if (tabId === 'dashboard') initDashboard();
+            if (tabId === 'progress') initProgressAnalytics();
+            if (tabId === 'review') initReviewMode();
+
+            // Close sidebar on mobile
+            if (window.innerWidth < 1024) {
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        /* ==========================================================
+           5. DASHBOARD LOGIC
+           ========================================================== */
+        function initDashboard() {
+            const totalQ = questionsData.length;
+            const attemptedKeys = Object.keys(state.userAnswers);
+            const attemptedCount = attemptedKeys.length;
+            
+            let correctCount = 0;
+            attemptedKeys.forEach(qId => {
+                const q = questionsData.find(item => item.id == qId);
+                if (q && state.userAnswers[qId] === q.correct) {
+                    correctCount++;
+                }
+            });
+
+            const accuracy = attemptedCount > 0 ? Math.round((correctCount / attemptedCount) * 100) : 0;
+
+            document.getElementById('statAttempted').innerText = `${attemptedCount} / ${totalQ}`;
+            document.getElementById('statCorrect').innerText = correctCount;
+            document.getElementById('statAccuracy').innerText = `${accuracy}%`;
+            document.getElementById('completedCountText').innerText = `${attemptedCount}/${totalQ} completed`;
+
+            if (state.examResult) {
+                document.getElementById('statBestScore').innerText = `${state.examResult.score10}/10`;
+            } else {
+                document.getElementById('statBestScore').innerText = 'N/A';
+            }
+
+            // Render Part Cards in Dashboard
+            const partsInfo = [
+                { id: 1, title: "Part 1: Adjectives Ending in -ED / -ING", count: 15, desc: "Participial adjectives & emotional states" },
+                { id: 2, title: "Part 2: Words Beginning with PRE-", count: 15, desc: "Prefix pre- for time and preparation" },
+                { id: 3, title: "Part 3: Words Beginning with DIS-", count: 15, desc: "Prefix dis- for reversal and negation" },
+                { id: 4, title: "Part 4: Adjectives Ending in -OUS", count: 15, desc: "Adjective suffix -ous formations" },
+                { id: 5, title: "Part 5: Nouns Ending in -ION / -MENT", count: 20, desc: "Abstract noun building suffixes" },
+                { id: 6, title: "Part 6: Academic -OLOGY / -LOGY", count: 10, desc: "Scientific studies and academic fields" },
+                { id: 7, title: "Part 7: Prefix EX- & Word Families", count: 10, desc: "Prefix ex- and comprehensive word families" }
+            ];
+
+            const grid = document.getElementById('partCardsGrid');
+            grid.innerHTML = '';
+            partsInfo.forEach(p => {
+                grid.innerHTML += `
+                    <div onclick="startPracticePart(${p.id})" class="bg-slate-50 hover:bg-pastel-50/50 border border-slate-200 hover:border-pastel-300 p-5 rounded-xl cursor-pointer transition-all flex flex-col justify-between space-y-3 group">
+                        <div>
+                            <span class="text-xs font-bold text-pastel-600 uppercase tracking-wider">${p.count} Questions</span>
+                            <h4 class="font-bold text-slate-800 group-hover:text-pastel-700 transition-colors mt-1">${p.title}</h4>
+                            <p class="text-xs text-slate-500 mt-1">${p.desc}</p>
+                        </div>
+                        <div class="flex items-center text-xs font-semibold text-pastel-600 space-x-1">
+                            <span>Practice now</span>
+                            <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function startPracticePart(partId) {
+            switchTab('practice');
+            document.getElementById('practicePartSelect').value = partId;
+            changePracticePart(partId);
+        }
+
+        /* ==========================================================
+           6. PRACTICE MODE LOGIC
+           ========================================================== */
+        function initPracticeMode() {
+            changePracticePart(0);
+        }
+
+        function changePracticePart(partId) {
+            state.practicePartFilter = parseInt(partId);
+            if (state.practicePartFilter === 0) {
+                state.practiceFilteredQuestions = [...questionsData];
+            } else {
+                state.practiceFilteredQuestions = questionsData.filter(q => q.part === state.practicePartFilter);
+            }
+            state.practiceIndex = 0;
+            renderPracticeQuestion();
+        }
+
+        function renderPracticeQuestion() {
+            const qList = state.practiceFilteredQuestions;
+            if (qList.length === 0) return;
+            if (state.practiceIndex >= qList.length) state.practiceIndex = qList.length - 1;
+            if (state.practiceIndex < 0) state.practiceIndex = 0;
+
+            const q = qList[state.practiceIndex];
+            const qNumEl = document.getElementById('practiceQNum');
+            const partBadgeEl = document.getElementById('practicePartBadge');
+            const qTextEl = document.getElementById('practiceQuestionText');
+            const optionsEl = document.getElementById('practiceOptionsContainer');
+            const progressText = document.getElementById('practiceProgressText');
+            const progressBar = document.getElementById('practiceProgressBar');
+            const expBox = document.getElementById('practiceExplanationBox');
+            const markBtn = document.getElementById('markReviewBtn');
+
+            qNumEl.innerText = `#${q.id}`;
+            partBadgeEl.innerText = q.partName;
+            qTextEl.innerText = `${state.practiceIndex + 1}. ${q.question}`;
+            progressText.innerText = `Question ${state.practiceIndex + 1} of ${qList.length}`;
+            
+            const pct = Math.round(((state.practiceIndex + 1) / qList.length) * 100);
+            progressBar.style.width = `${pct}%`;
+
+            // Mark button active status
+            if (state.markedQuestions.includes(q.id)) {
+                markBtn.className = "text-amber-500 hover:text-slate-400 text-xl transition-colors";
+            } else {
+                markBtn.className = "text-slate-300 hover:text-amber-500 text-xl transition-colors";
+            }
+
+            // Render options A, B, C, D
+            optionsEl.innerHTML = '';
+            const letters = ['A', 'B', 'C', 'D'];
+            const userSelected = state.userAnswers[q.id];
+
+            q.options.forEach((opt, idx) => {
+                let cardClass = "bg-white border border-slate-200 hover:border-pastel-400 text-slate-700";
+                let badgeClass = "bg-slate-100 text-slate-600";
+
+                if (userSelected !== undefined) {
+                    if (idx === q.correct) {
+                        cardClass = "bg-emerald-50 border-emerald-300 text-emerald-900 font-medium";
+                        badgeClass = "bg-emerald-200 text-emerald-800";
+                    } else if (idx === userSelected && userSelected !== q.correct) {
+                        cardClass = "bg-rose-50 border-rose-300 text-rose-900 font-medium";
+                        badgeClass = "bg-rose-200 text-rose-800";
+                    }
+                }
+
+                optionsEl.innerHTML += `
+                    <div onclick="selectPracticeAnswer(${q.id}, ${idx})" class="${cardClass} p-4 rounded-xl border cursor-pointer transition-all flex items-center space-x-4 shadow-2xs">
+                        <span class="${badgeClass} w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0">${letters[idx]}</span>
+                        <span class="text-base">${opt}</span>
+                    </div>
+                `;
+            });
+
+            // Show explanation if answered
+            if (userSelected !== undefined) {
+                expBox.classList.remove('hidden');
+                document.getElementById('practiceExplanationContent').innerHTML = `
+                    <p><strong>Correct Answer:</strong> ${letters[q.correct]}. ${q.options[q.correct]}</p>
+                    <p><strong>English Note:</strong> ${q.explanationEn}</p>
+                    <p class="text-slate-600"><strong>Tiếng Việt:</strong> ${q.explanationVi}</p>
+                `;
+            } else {
+                expBox.classList.add('hidden');
+            }
+        }
+
+        function selectPracticeAnswer(qId, optionIdx) {
+            state.userAnswers[qId] = optionIdx;
+            saveStateToLocalStorage();
+            renderPracticeQuestion();
+            initDashboard(); // Update counts
+        }
+
+        function nextPracticeQuestion() {
+            if (state.practiceIndex < state.practiceFilteredQuestions.length - 1) {
+                state.practiceIndex++;
+                renderPracticeQuestion();
+            }
+        }
+
+        function prevPracticeQuestion() {
+            if (state.practiceIndex > 0) {
+                state.practiceIndex--;
+                renderPracticeQuestion();
+            }
+        }
+
+        function toggleMarkCurrentQuestion() {
+            const q = state.practiceFilteredQuestions[state.practiceIndex];
+            if (!q) return;
+            const idx = state.markedQuestions.indexOf(q.id);
+            if (idx > -1) {
+                state.markedQuestions.splice(idx, 1);
+            } else {
+                state.markedQuestions.push(q.id);
+            }
+            saveStateToLocalStorage();
+            renderPracticeQuestion();
+            updateReviewCountBadge();
+        }
+
+        /* ==========================================================
+           7. EXAM MODE LOGIC
+           ========================================================== */
+        let examQuestionsShuffled = [];
+
+        function startExam() {
+            document.getElementById('examStartScreen').classList.remove('hidden');
+            document.getElementById('examActiveScreen').classList.add('hidden');
+            document.getElementById('examResultScreen').classList.add('hidden');
+        }
+
+        function beginExam() {
+            // Shuffle questions and options
+            examQuestionsShuffled = JSON.parse(JSON.stringify(questionsData));
+            // Shuffle order
+            examQuestionsShuffled.sort(() => Math.random() - 0.5);
+
+            state.examAnswers = {};
+            state.examCurrentIndex = 0;
+            state.examSubmitted = false;
+            state.examTimerSeconds = 75 * 60;
+
+            document.getElementById('examStartScreen').classList.add('hidden');
+            document.getElementById('examActiveScreen').classList.remove('hidden');
+            document.getElementById('examResultScreen').classList.add('hidden');
+
+            renderExamQuestion();
+            renderExamNavigator();
+
+            if (state.examTimerInterval) clearInterval(state.examTimerInterval);
+            state.examTimerInterval = setInterval(() => {
+                state.examTimerSeconds--;
+                updateExamTimerDisplay();
+                if (state.examTimerSeconds <= 0) {
+                    clearInterval(state.examTimerInterval);
+                    executeExamSubmission();
+                }
+            }, 1000);
+        }
+
+        function updateExamTimerDisplay() {
+            const mins = Math.floor(state.examTimerSeconds / 60);
+            const secs = state.examTimerSeconds % 60;
+            document.getElementById('examTimerDisplay').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function renderExamQuestion() {
+            const q = examQuestionsShuffled[state.examCurrentIndex];
+            if (!q) return;
+
+            document.getElementById('examCurrentBadge').innerText = `Question ${state.examCurrentIndex + 1}/100`;
+            document.getElementById('examQuestionText').innerText = `${state.examCurrentIndex + 1}. ${q.question}`;
+
+            const optionsEl = document.getElementById('examOptionsContainer');
+            optionsEl.innerHTML = '';
+            const letters = ['A', 'B', 'C', 'D'];
+            const currentSelected = state.examAnswers[q.id];
+
+            q.options.forEach((opt, idx) => {
+                const isSelected = currentSelected === idx;
+                const cardClass = isSelected ? "bg-pastel-50 border-pastel-400 text-pastel-900 font-medium" : "bg-white border border-slate-200 hover:border-pastel-300 text-slate-700";
+                const badgeClass = isSelected ? "bg-pastel-500 text-white" : "bg-slate-100 text-slate-600";
+
+                optionsEl.innerHTML += `
+                    <div onclick="selectExamAnswer(${q.id}, ${idx})" class="${cardClass} p-4 rounded-xl border cursor-pointer transition-all flex items-center space-x-4 shadow-2xs">
+                        <span class="${badgeClass} w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0">${letters[idx]}</span>
+                        <span class="text-base">${opt}</span>
+                    </div>
+                `;
+            });
+
+            renderExamNavigator();
+        }
+
+        function selectExamAnswer(qId, optionIdx) {
+            state.examAnswers[qId] = optionIdx;
+            renderExamQuestion();
+            
+            const answeredCount = Object.keys(state.examAnswers).length;
+            document.getElementById('examAnsweredCount').innerText = `${answeredCount}/100 Answered`;
+        }
+
+        function nextExamQuestion() {
+            if (state.examCurrentIndex < examQuestionsShuffled.length - 1) {
+                state.examCurrentIndex++;
+                renderExamQuestion();
+            }
+        }
+
+        function prevExamQuestion() {
+            if (state.examCurrentIndex > 0) {
+                state.examCurrentIndex--;
+                renderExamQuestion();
+            }
+        }
+
+        function renderExamNavigator() {
+            const grid = document.getElementById('examNavigatorGrid');
+            grid.innerHTML = '';
+            examQuestionsShuffled.forEach((q, idx) => {
+                const isAnswered = state.examAnswers[q.id] !== undefined;
+                const isCurrent = state.examCurrentIndex === idx;
+
+                let btnClass = "bg-slate-100 text-slate-600 hover:bg-slate-200";
+                if (isAnswered) btnClass = "bg-pastel-500 text-white font-bold";
+                if (isCurrent) btnClass += " ring-2 ring-pastel-700";
+
+                grid.innerHTML += `
+                    <button onclick="jumpToExamQuestion(${idx})" class="${btnClass} h-9 rounded-lg text-xs font-bold transition-all flex items-center justify-center">
+                        ${idx + 1}
+                    </button>
+                `;
+            });
+        }
+
+        function jumpToExamQuestion(idx) {
+            state.examCurrentIndex = idx;
+            renderExamQuestion();
+        }
+
+        function confirmSubmitExam() {
+            const answeredCount = Object.keys(state.examAnswers).length;
+            document.getElementById('submitConfirmText').innerText = `You have answered ${answeredCount} out of 100 questions. Are you sure you want to submit?`;
+            document.getElementById('submitConfirmModal').classList.remove('hidden');
+            document.getElementById('submitConfirmModal').classList.add('flex');
+        }
+
+        function closeSubmitModal() {
+            document.getElementById('submitConfirmModal').classList.remove('flex');
+            document.getElementById('submitConfirmModal').classList.add('hidden');
+        }
+
+        function executeExamSubmission() {
+            closeSubmitModal();
+            if (state.examTimerInterval) clearInterval(state.examTimerInterval);
+
+            let correctCount = 0;
+            examQuestionsShuffled.forEach(q => {
+                if (state.examAnswers[q.id] === q.correct) {
+                    correctCount++;
+                }
+            });
+
+            const incorrectCount = 100 - correctCount;
+            const score10 = parseFloat(((correctCount / 100) * 10).toFixed(1));
+            const timeTakenSecs = (75 * 60) - state.examTimerSeconds;
+            const timeTakenMinsStr = `${Math.floor(timeTakenSecs / 60)}m ${timeTakenSecs % 60}s`;
+
+            state.examResult = {
+                score10,
+                correctCount,
+                incorrectCount,
+                accuracy: correctCount,
+                timeTaken: timeTakenMinsStr
+            };
+            saveStateToLocalStorage();
+
+            // Populate Result Screen
+            document.getElementById('resScore10').innerText = `${score10}/10`;
+            document.getElementById('resCorrect').innerText = `${correctCount}/100`;
+            document.getElementById('resAccuracy').innerText = `${correctCount}%`;
+            document.getElementById('resTime').innerText = timeTakenMinsStr;
+
+            document.getElementById('examActiveScreen').classList.add('hidden');
+            document.getElementById('examResultScreen').classList.remove('hidden');
+            initDashboard();
+        }
+
+        function resetExamState() {
+            startExam();
+        }
+
+        /* ==========================================================
+           8. REVIEW MISTAKES & MARKED LOGIC
+           ========================================================== */
+        function initReviewMode() {
+            const container = document.getElementById('reviewContainer');
+            container.innerHTML = '';
+
+            // Gather all questions that were answered incorrectly or marked
+            const reviewIds = new Set();
+            Object.keys(state.userAnswers).forEach(qId => {
+                const q = questionsData.find(item => item.id == qId);
+                if (q && state.userAnswers[qId] !== q.correct) {
+                    reviewIds.add(parseInt(qId));
+                }
+            });
+            state.markedQuestions.forEach(qId => reviewIds.add(qId));
+
+            document.getElementById('reviewTabBadge').innerText = `${reviewIds.size} questions`;
+
+            if (reviewIds.size === 0) {
+                container.innerHTML = `
+                    <div class="bg-white rounded-2xl border border-slate-200 p-12 text-center space-y-3">
+                        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl mx-auto flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">No mistakes or marked questions yet!</h3>
+                        <p class="text-sm text-slate-500">Practice more questions or take the exam to populate your review list.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            reviewIds.forEach(qId => {
+                const q = questionsData.find(item => item.id === qId);
+                if (!q) return;
+
+                const userAns = state.userAnswers[q.id];
+                const letters = ['A', 'B', 'C', 'D'];
+
+                let optionsHtml = '';
+                q.options.forEach((opt, idx) => {
+                    let badgeClass = "bg-slate-100 text-slate-600";
+                    let borderClass = "border-slate-200 text-slate-700 bg-white";
+                    if (idx === q.correct) {
+                        borderClass = "border-emerald-300 bg-emerald-50 text-emerald-900 font-medium";
+                        badgeClass = "bg-emerald-200 text-emerald-800";
+                    } else if (idx === userAns) {
+                        borderClass = "border-rose-300 bg-rose-50 text-rose-900 font-medium";
+                        badgeClass = "bg-rose-200 text-rose-800";
+                    }
+
+                    optionsHtml += `
+                        <div class="p-3 rounded-xl border ${borderClass} flex items-center space-x-3 text-sm">
+                            <span class="w-7 h-7 rounded-lg ${badgeClass} font-bold flex items-center justify-center shrink-0">${letters[idx]}</span>
+                            <span>${opt}</span>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4 shadow-xs">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-pastel-600 bg-pastel-50 px-3 py-1 rounded-full">${q.partName} (#${q.id})</span>
+                            <button onclick="removeBookmark(${q.id})" class="text-slate-400 hover:text-rose-500 text-sm" title="Remove from review">
+                                <i class="fa-solid fa-trash"></i> Remove
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-800">${q.question}</h4>
+                        <div class="space-y-2">${optionsHtml}</div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-sm text-slate-700 space-y-1">
+                            <p class="font-bold text-emerald-700"><i class="fa-solid fa-circle-check mr-1"></i> Explanation:</p>
+                            <p>${q.explanationEn}</p>
+                            <p class="text-slate-600 font-medium">Tiếng Việt: ${q.explanationVi}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function updateReviewCountBadge() {
+            const reviewIds = new Set();
+            Object.keys(state.userAnswers).forEach(qId => {
+                const q = questionsData.find(item => item.id == qId);
+                if (q && state.userAnswers[qId] !== q.correct) reviewIds.add(parseInt(qId));
+            });
+            state.markedQuestions.forEach(qId => reviewIds.add(qId));
+
+            const badge = document.getElementById('reviewCountBadge');
+            badge.innerText = reviewIds.size;
+        }
+
+        function removeBookmark(qId) {
+            const idx = state.markedQuestions.indexOf(qId);
+            if (idx > -1) state.markedQuestions.splice(idx, 1);
+            delete state.userAnswers[qId];
+            saveStateToLocalStorage();
+            initReviewMode();
+            updateReviewCountBadge();
+            initDashboard();
+        }
+
+        /* ==========================================================
+           9. VOCABULARY BANK & FLASHCARDS LOGIC
+           ========================================================== */
+        function initVocabBank() {
+            renderVocabGrid(vocabBankData);
+        }
+
+        function filterVocabBank() {
+            const query = document.getElementById('vocabSearchInput').value.toLowerCase();
+            const topic = document.getElementById('vocabTopicFilter').value;
+
+            const filtered = vocabBankData.filter(v => {
+                const matchQuery = v.word.toLowerCase().includes(query) || v.meaning.toLowerCase().includes(query) || v.prefixSuffix.toLowerCase().includes(query);
+                const matchTopic = topic === 'all' || v.topic.toString() === topic;
+                return matchQuery && matchTopic;
+            });
+
+            renderVocabGrid(filtered);
+        }
+
+        function renderVocabGrid(dataList) {
+            const grid = document.getElementById('vocabGrid');
+            grid.innerHTML = '';
+
+            if (dataList.length === 0) {
+                grid.innerHTML = `<div class="col-span-3 text-center py-12 text-slate-400">No vocabulary items found.</div>`;
+                return;
+            }
+
+            dataList.forEach(v => {
+                const isKnown = state.vocabKnown[v.word] === true;
+                const statusBadge = isKnown ? 
+                    `<span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-check mr-1"></i> Known</span>` :
+                    `<span class="bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-1 rounded-full">Learning</span>`;
+
+                grid.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 space-y-4 shadow-2xs flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-xl font-extrabold text-slate-800">${v.word}</h3>
+                                ${statusBadge}
+                            </div>
+                            <div class="flex items-center space-x-2 text-xs text-slate-500">
+                                <span class="font-mono bg-slate-100 px-2 py-0.5 rounded text-slate-600">${v.ipa}</span>
+                                <span class="bg-pastel-50 text-pastel-700 font-semibold px-2 py-0.5 rounded">${v.pos}</span>
+                            </div>
+                            <p class="text-sm font-semibold text-slate-700 pt-1">${v.meaning}</p>
+                            <p class="text-xs text-slate-500 italic">"${v.example}"</p>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-xs text-slate-400 font-medium">${v.prefixSuffix}</span>
+                            <button onclick="toggleVocabKnown('${v.word}')" class="text-xs font-semibold px-3 py-1.5 rounded-xl border transition-all ${isKnown ? 'bg-emerald-50 border-emerald-300 text-emerald-700' : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'}">
+                                ${isKnown ? 'Mark Unknown' : 'Mark Known'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleVocabKnown(wordStr) {
+            state.vocabKnown[wordStr] = !state.vocabKnown[wordStr];
+            saveStateToLocalStorage();
+            filterVocabBank();
+        }
+
+        // Flashcards Modal
+        let activeFlashcardsList = [...vocabBankData];
+
+        function openFlashcardModal() {
+            state.flashcardIndex = 0;
+            state.flashcardFlipped = false;
+            document.getElementById('flashcardModal').classList.remove('hidden');
+            document.getElementById('flashcardModal').classList.add('flex');
+            renderFlashcard();
+        }
+
+        function closeFlashcardModal() {
+            document.getElementById('flashcardModal').classList.remove('flex');
+            document.getElementById('flashcardModal').classList.add('hidden');
+            filterVocabBank();
+        }
+
+        function renderFlashcard() {
+            if (activeFlashcardsList.length === 0) return;
+            if (state.flashcardIndex >= activeFlashcardsList.length) state.flashcardIndex = 0;
+            if (state.flashcardIndex < 0) state.flashcardIndex = activeFlashcardsList.length - 1;
+
+            const v = activeFlashcardsList[state.flashcardIndex];
+            const isKnown = state.vocabKnown[v.word] === true;
+
+            document.getElementById('fcCardIndex').innerText = `Card ${state.flashcardIndex + 1} of ${activeFlashcardsList.length}`;
+            
+            const badge = document.getElementById('fcStatusBadge');
+            if (isKnown) {
+                badge.className = "absolute top-4 right-4 text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700";
+                badge.innerText = "Known";
+            } else {
+                badge.className = "absolute top-4 right-4 text-xs font-bold px-2.5 py-1 rounded-full bg-slate-200 text-slate-700";
+                badge.innerText = "Learning";
+            }
+
+            const content = document.getElementById('fcContent');
+            if (!state.flashcardFlipped) {
+                content.innerHTML = `
+                    <h2 class="text-3xl font-extrabold text-slate-800">${v.word}</h2>
+                    <p class="text-sm text-slate-500 font-mono">${v.ipa}</p>
+                    <p class="text-xs text-pastel-600 font-semibold mt-2">(Click card to reveal meaning)</p>
+                `;
+            } else {
+                content.innerHTML = `
+                    <h3 class="text-xl font-bold text-slate-800">${v.meaning}</h3>
+                    <p class="text-xs text-slate-500 italic mt-1">${v.def}</p>
+                    <p class="text-xs font-mono text-slate-600 bg-white/80 p-2 rounded-lg mt-2">"${v.example}"</p>
+                    <p class="text-xs text-pastel-700 font-bold mt-1">${v.prefixSuffix} | Family: ${v.family}</p>
+                `;
+            }
+        }
+
+        function flipFlashcard() {
+            state.flashcardFlipped = !state.flashcardFlipped;
+            renderFlashcard();
+        }
+
+        function nextFlashcard() {
+            state.flashcardFlipped = false;
+            if (state.flashcardIndex < activeFlashcardsList.length - 1) {
+                state.flashcardIndex++;
+            } else {
+                state.flashcardIndex = 0;
+            }
+            renderFlashcard();
+        }
+
+        function prevFlashcard() {
+            state.flashcardFlipped = false;
+            if (state.flashcardIndex > 0) {
+                state.flashcardIndex--;
+            } else {
+                state.flashcardIndex = activeFlashcardsList.length - 1;
+            }
+            renderFlashcard();
+        }
+
+        function markCurrentVocabKnown() {
+            const v = activeFlashcardsList[state.flashcardIndex];
+            if (!v) return;
+            state.vocabKnown[v.word] = !state.vocabKnown[v.word];
+            saveStateToLocalStorage();
+            renderFlashcard();
+            // Automatically move to next vocabulary item after clicking Mark as Known
+            setTimeout(() => {
+                nextFlashcard();
+            }, 300);
+        }
+
+        /* ==========================================================
+           10. DETAILED PROGRESS ANALYTICS
+           ========================================================== */
+        function initProgressAnalytics() {
+            const container = document.getElementById('partProgressList');
+            container.innerHTML = '';
+
+            const partsSummary = [
+                { id: 1, name: "Part 1: Adjectives Ending in -ED / -ING", range: "1–15" },
+                { id: 2, name: "Part 2: Words Beginning with PRE-", range: "16–30" },
+                { id: 3, name: "Part 3: Words Beginning with DIS-", range: "31–45" },
+                { id: 4, name: "Part 4: Adjectives Ending in -OUS", range: "46–60" },
+                { id: 5, name: "Part 5: Nouns Ending in -ION / -MENT", range: "61–80" },
+                { id: 6, name: "Part 6: Academic -OLOGY / -LOGY", range: "81–90" },
+                { id: 7, name: "Part 7: Prefix EX- & Word Families", range: "91–100" }
+            ];
+
+            partsSummary.forEach(p => {
+                const partQuestions = questionsData.filter(q => q.part === p.id);
+                let attempted = 0;
+                let correct = 0;
+
+                partQuestions.forEach(q => {
+                    if (state.userAnswers[q.id] !== undefined) {
+                        attempted++;
+                        if (state.userAnswers[q.id] === q.correct) correct++;
+                    }
+                });
+
+                const pct = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+                const completionPct = Math.round((attempted / partQuestions.length) * 100);
+
+                container.innerHTML += `
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-base">${p.name}</h4>
+                                <span class="text-xs text-slate-400">Questions ${p.range} (${partQuestions.length} questions)</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs font-semibold text-slate-600">Attempted: ${attempted}/${partQuestions.length}</span>
+                                <span class="bg-pastel-100 text-pastel-700 text-xs font-bold px-3 py-1 rounded-full">${pct}% Accuracy</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+                            <div class="bg-pastel-500 h-full transition-all duration-300" style="width: ${completionPct}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        /* ==========================================================
+           11. RESET PROGRESS & CONFIRMATION
+           ========================================================== */
+        function confirmReset() {
+            document.getElementById('resetModal').classList.remove('hidden');
+            document.getElementById('resetModal').classList.add('flex');
+        }
+
+        function closeResetModal() {
+            document.getElementById('resetModal').classList.remove('flex');
+            document.getElementById('resetModal').classList.add('hidden');
+        }
+
+        function executeResetProgress() {
+            closeResetModal();
+            localStorage.removeItem('vocabMaster_state');
+            state.userAnswers = {};
+            state.markedQuestions = [];
+            state.vocabKnown = {};
+            state.examResult = null;
+
+            initDashboard();
+            initPracticeMode();
+            initVocabBank();
+            updateReviewCountBadge();
+            switchTab('dashboard');
+        }
+    </script>
+</body>
+</html>
